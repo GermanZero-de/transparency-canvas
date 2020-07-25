@@ -7,6 +7,8 @@
  * @author f-do-902 on github
  */
 
+// Configurations:
+
 // Define the graphics parameters for different breakpoints here
 GERMANZERO_TRANSP_GRAPHICS_PARAMETERS = {
  992: {imgHeight : 86, barHeight: 55, dstText3Right: 12, dstText1Left: 2,
@@ -18,6 +20,26 @@ GERMANZERO_TRANSP_GRAPHICS_PARAMETERS = {
  1:   {imgHeight : 48, barHeight: 30, dstText3Right: 6, dstText1Left: 1,
     dstText1Top: 2, dstText1Bottom: 6, txtH: 8, textSize: 10, radius: 5.5, rName: 'mobile-portrait'}
 };
+
+// "Business" functions
+
+// "public" function
+
+/**
+ * Gets the progress of time in the current year, i. e. "0" on New Year and "100" on
+ * December 31st.
+ */
+function getGzPbPercentageOfCurrentYear() {
+ var newYear = new Date(new Date().getFullYear(), 0, 1).getTime();
+ var endOfYear = new Date(new Date().getFullYear()+1,0,1).getTime()-1;
+ var yLength = endOfYear - newYear; // Length of year in milliseconds
+
+ var nowInYear = ((new Date().getTime()-newYear)/yLength);
+
+ return (nowInYear * 100);
+}
+
+// "private" function: give the parameters for the current resolution
 
 /**
  * Gets the highest defined window width which is smaller than
@@ -37,6 +59,8 @@ function getGzPbGraphicsParameters() {
  }
  return GERMANZERO_TRANSP_GRAPHICS_PARAMETERS[breakPoint];
 }
+
+// "private" graphics utility functions
 
 /**
  * Draws the "tip" (the right end) of the
@@ -102,6 +126,8 @@ function gzPbDrawRRect(ctx, x, y, width, height, radius, fill, stroke, sharpCorn
     ctx.stroke();
   }
 }
+
+// "public" function called from website
 
 /**
  * Draws a a progress bar-like gauge of the amount of donations received on an html canvas.
