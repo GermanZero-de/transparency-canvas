@@ -26,18 +26,43 @@ GERMANZERO_TRANSP_GRAPHICS_PARAMETERS = {
 
 // "public" function
 
+function gzPbParseData(data) {
+  var parts = data.split(";");
+  var yr = parts[0];
+  var text1 = parts[1];
+  var pct = 
+   parts[2].length > 5 && parts[2].charAt(0) == "("
+    && parts[2].charAt(5) == ")"
+     ? 
+   getGzPbPercentageOfYear(parts[2].substring(1,5)) : parts[2];
+  var text3a = parts[3];
+  var text3b = parts[4];
+  return { y: yr, innerText: text1, pct : pct, textUpperRight: text3a, textLowerRight: text3b };
+}
+
 /**
- * Gets the progress of time in the current year, i. e. "0" on New Year and "100" on
- * December 31st.
+ * Compares the given year "yr" to the current date. If the given year 
+ * is the current year, a value between 0 and 100 is returned, where 
+ * 0 is on January 1st and 100 on December 31st 24:00. 
+ *
+ * If the current year is before the given year, "0" is returned, if 
+ * it is after the given year, "100" is returned.
  */
-function getGzPbPercentageOfCurrentYear() {
- var newYear = new Date(new Date().getFullYear(), 0, 1).getTime();
- var endOfYear = new Date(new Date().getFullYear()+1,0,1).getTime()-1;
- var yLength = endOfYear - newYear; // Length of year in milliseconds
+function getGzPbPercentageOfYear(yr) {
+   var ret = 0;
+   var thisYear = new Date().getFullYear();
+   if (yr == thisYear) {
+   var newYear = new Date(new Date().getFullYear(), 0, 1).getTime();
+   var endOfYear = new Date(new Date().getFullYear()+1,0,1).getTime()-1;
+   var yLength = endOfYear - newYear; // Length of year in milliseconds
 
- var nowInYear = ((new Date().getTime()-newYear)/yLength);
+   var nowInYear = ((new Date().getTime()-newYear)/yLength);
 
- return (nowInYear * 100);
+   ret = (nowInYear * 100);
+ } else {
+   ret = thisYear < yr ? 0 : 100;
+ }
+ return ret;
 }
 
 // "private" function: give the parameters for the current resolution
