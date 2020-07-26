@@ -12,7 +12,8 @@ function testGetDpr() {
   return window.devicePixelRatio || 1;
 }
 
-function testGetBsr() {
+function testGetBsr(canvas) {
+  var ctx = canvas.getContext("2d");
   return ctx.webkitBackingStorePixelRatio ||
               ctx.mozBackingStorePixelRatio ||
               ctx.msBackingStorePixelRatio ||
