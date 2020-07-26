@@ -17,14 +17,35 @@ _GermanZero progress bar_).
 
 ## Changelog
 
-### 2020-07-25 17:15 CEST
-As I understand, the progress bar for the current year is supposed to show how far the year has progressed, i. e. it 
-should show "zero" on January 1st and "full width" on December 31st. So a "business method" which returns the point 
-in the current year of the current date is added: 
+### v0.0.2 
+* Renders better on HiDPI displays
+* The business function to get the "time progress" of the year has been rewritten 
+  to recieve a year to which the current date should be compared, so it returns 
+  0 if the given year has still to come and 100 if the given year is already over:
+    ```javascript
+    function getGzPbPercentageOfYear(yr) 
+    ```
+* Added a business function which can parse CSV like strings (semicolon separated) 
+  into the data which are needed to draw the bars, e. g. 
+  `2020;673.000 €;(2020);Ziel:;€3,848 Mio` where the `(2020)` means "get the 
+  current date and check where it is in the year of 2020 according to 
+  `getGzPbPercentageOfYear` (the other values are fixed values) or 
+  `2019;;27;Erreicht:;€482.886,73` with a fixed bar width of 27% and no 
+  text inside the bar (the two semicolons following each other with no text 
+  in between):
+    ```javascript
+    function gzPbParseData(data)
+    ```
+  The `data` string is currently taken from the extra data on the embedded 
+  custom element with the two attributes `data-bar1` and `data-bar2`.
 
-```javascript
-function getGzPbPercentageOfCurrentYear()
-```
+### v0.0.1
+* Contains a function to get the "time" progress of the current year:
+    ```javascript
+    function getGzPbPercentageOfCurrentYear()
+    ```
+* Does not render well on HiDPI/Retina displays
+
 
 ### 2020-07-25 13:17 CEST
 Initial import
