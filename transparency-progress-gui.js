@@ -8,19 +8,6 @@
  * @version v0.0.2
  */
 
-function testGetDpr() {
-  return window.devicePixelRatio || 1;
-}
-
-function testGetBsr(canvas) {
-  var ctx = canvas.getContext("2d");
-  return ctx.webkitBackingStorePixelRatio ||
-              ctx.mozBackingStorePixelRatio ||
-              ctx.msBackingStorePixelRatio ||
-              ctx.oBackingStorePixelRatio ||
-              ctx.backingStorePixelRatio || 1;
-}
-
 // Configurations:
 
 // Define the graphics parameters for different breakpoints here
@@ -141,7 +128,34 @@ function gzPbDrawRRect(ctx, x, y, width, height, radius, fill, stroke, sharpCorn
   }
 }
 
+// functions for handling retina/hidpi displays
+function getGzPbDpr() {
+  return window.devicePixelRatio || 1;
+}
+
+function getGzPbBsr(canvas) {
+  var ctx = canvas.getContext("2d");
+  return ctx.webkitBackingStorePixelRatio ||
+              ctx.mozBackingStorePixelRatio ||
+              ctx.msBackingStorePixelRatio ||
+              ctx.oBackingStorePixelRatio ||
+              ctx.backingStorePixelRatio || 1;
+}
+
 // "public" function called from website
+
+/**
+ * Sets up a canvas to look good on hidpi/retina
+ */
+function setGzPbCanvasSize(canvas, baseW, baseH) {
+  var ratio = getGzPbDpr() / getGzPbBsr(canvas);
+  can.width = w * ratio;
+  can.height = h * ratio;
+  can.style.width = w + "px";
+  can.style.height = h + "px";
+  can.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
+  return can;
+}
 
 /**
  * Draws a a progress bar-like gauge of the amount of donations received on an html canvas.
