@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Progress generator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script src="transparency-progress-gui.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans:regular"
+      rel="stylesheet"
+    />
+    <style>body { font-family: DM Sans, sans-serif; font-size: 18px; }
+    </style>
+
+
+  </head>
+
+  <body>
+     <h1>Test-/Demoanwendung Spendenfortschrittsbalken</h1>
+     <h2>Generierte Grafiken</h2>
+     <canvas id="progressVar" width="100%" height="83" 
+      style="border:1px solid #000000; display:block; "></canvas>
+   
+     <hr style="color: transparent;">
+     <hr style="color: transparent;">
+
+
+      
+     <script>
+
+      // This function triggers the drawing and redrawing of the gauge
+      function gzPbDrawRedraw() {
+                  var canvas = $("#progressVar").get(0);
+                  canvas.width = $("#progressVar").parent().width();
+                  canvas.height = getGzPbGraphicsParameters().imgHeight;
+
+                  gzPbDrawProgress("2020", "673.000 €", "Ziel:", "€3,848 Mio",
+                   99.5, "#progressVar");
+      }
+
+      // Load required fonts.
+      // This should already be triggered on this page, but we need the
+      // "active" hook to render the page as soon as the fonts are loaded.
+      // According to some tests, a double "load" call on WebFont does not
+      // harm, but who can be sure? (FN)
+      WebFont.load({
+		google: {families: ['DM Sans', 'DM Sans:Bold']}, active: gzPbDrawRedraw
+      });     
+
+      // Handling of window resizing
+      (function() {
+          // In case of resizing: redraw to fit exactly in
+          window.addEventListener('resize', gzPbDrawRedraw, false);
+      })();
+  </script>
+  </body>
+</html>
