@@ -154,7 +154,7 @@ function setGzPbCanvasSize(canvas, baseW, baseH) {
   canvas.style.width = w + "px";
   canvas.style.height = h + "px";
   canvas.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
-  return can;
+  return canvas;
 }
 
 /**
