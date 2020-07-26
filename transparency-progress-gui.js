@@ -5,7 +5,20 @@
  *
  * @file JavaScript for drawing a progress bar-like gauge of the amount of donations received.
  * @author f-do-902 on github
+ * @version v0.0.2
  */
+
+function testGetDpr() {
+  return window.devicePixelRatio || 1;
+}
+
+function testGetBsr() {
+  return ctx.webkitBackingStorePixelRatio ||
+              ctx.mozBackingStorePixelRatio ||
+              ctx.msBackingStorePixelRatio ||
+              ctx.oBackingStorePixelRatio ||
+              ctx.backingStorePixelRatio || 1;
+}
 
 // Configurations:
 
