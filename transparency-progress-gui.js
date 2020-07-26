@@ -149,10 +149,10 @@ function getGzPbBsr(canvas) {
  */
 function setGzPbCanvasSize(canvas, baseW, baseH) {
   var ratio = getGzPbDpr() / getGzPbBsr(canvas);
-  canvas.width = w * ratio;
-  canvas.height = h * ratio;
-  canvas.style.width = w + "px";
-  canvas.style.height = h + "px";
+  canvas.width = baseW * ratio;
+  canvas.height = baseH * ratio;
+  canvas.style.width = baseW + "px";
+  canvas.style.height = baseH + "px";
   canvas.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
   return canvas;
 }
