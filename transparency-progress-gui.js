@@ -5,7 +5,7 @@
  *
  * @file JavaScript for drawing a progress bar-like gauge of the amount of donations received.
  * @author f-do-902 on github
- * @version v0.0.2
+ * @version v0.0.3
  */
 
 // Configurations:

@@ -17,6 +17,12 @@ _GermanZero progress bar_).
 
 ## Changelog
 
+### v0.0.3
+* Copied the logic to trigger the rendering into this project as it is less trivial 
+  to start painting on the canvas in all browsers than expected.
+* Planning to embed a minified version of the script instead of delivering it via 
+  jsdelivr CDN - added a minification action
+
 ### v0.0.2 
 * Renders better on HiDPI displays
 * The business function to get the "time progress" of the year has been rewritten 
