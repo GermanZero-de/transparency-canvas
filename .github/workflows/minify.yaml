@@ -9,11 +9,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so auto-minify job can access it
       - uses: actions/checkout@v2
 
-      - name: Auto Minify
-        uses: nizarmah/auto-minify@master
-
       - name: Cleanup existing minified js
         run: for f in *.min.js; [ -e "${f%.*}.js" ] && rm "$f"; done
+        shell: bash
+
+      - name: Auto Minify
+        uses: nizarmah/auto-minify@master
 
       # Auto commits minified files to the repository
       # Ignore it if you don't want to commit the files to the repository 
