@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Cleanup existing minified js
-        run: for f in *.min.js; [ -e "${f%.*}.js" ] && rm "$f"; done
+        run: for f in *.min.js; do [ -e "${f%.*}.js" ] && rm "$f"; done
         shell: bash
 
       - name: Auto Minify
