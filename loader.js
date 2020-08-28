@@ -46,10 +46,7 @@ function gzPbDrawRedraw() {
      var paintedOnce = window.GZPB.paintedOnce || false;
 
      if ((!hasFont && hasFontNow) || (!paintedOnce)) {
-         console.log("Need to redraw");
          gzPbDrawRedraw();
-     } else {
-         console.log("No need to redraw");
      }
 
      window.GZPB.paintedWithFont = hasFontNow;
@@ -73,7 +70,6 @@ function gzPbInitDraw() {
  // the global variables so that no unnecessary repaint is
  // tried.
 function gzPbDrawWhenFontLoaded() {
-     console.log("Font loaded - redraw");
      gzPbDrawRedraw();
      window.GZPB || (window.GZPB = {});
      window.GZPB.paintedWithFont = true;

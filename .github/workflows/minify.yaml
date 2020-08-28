@@ -12,6 +12,9 @@ jobs:
       - name: Auto Minify
         uses: nizarmah/auto-minify@master
 
+      - name: Cleanup existing minified js
+        run: for f in *.min.js; [ -e "${f%.*}.js" ] && rm "$f"; done
+
       # Auto commits minified files to the repository
       # Ignore it if you don't want to commit the files to the repository 
       - name: Auto committing minified files
